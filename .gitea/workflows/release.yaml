@@ -9,6 +9,11 @@ on:
       - ".gitea/workflows/release.yaml"
   workflow_dispatch:
 
+# Don't let quick successive pushes publish concurrently.
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
 env:
   REGISTRY: git.adminforge.de
   NAMESPACE: patheticpat/feature-creep
@@ -44,4 +49,12 @@ jobs:
 
       - name: Publish
         # Already published versions are skipped; bump "version" to release.
-        run: npx -y @devcontainers/cli features publish ./src --registry "$REGISTRY" --namespace "$NAMESPACE"
+        # That makes retrying safe: the registry's proxy rate-limits bursts of
+        # uploads, and each attempt resumes where the previous one stopped.
+        run: |
+          for attempt in 1 2 3 4 5; do
+            npx -y @devcontainers/cli features publish ./src --registry "$REGISTRY" --namespace "$NAMESPACE" && exit 0
+            echo "::warning::publish attempt $attempt failed, retrying in 30s"
+            sleep 30
+          done
+          exit 1
