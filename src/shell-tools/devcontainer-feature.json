@@ -1,0 +1,21 @@
+{
+    "id": "shell-tools",
+    "version": "1.0.0",
+    "name": "Shell tools",
+    "description": "Installs vim, fzf, ripgrep, fd, bat, starship, zoxide and eza.",
+    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "options": {
+        "vim": { "type": "boolean", "default": true, "description": "Install vim and set EDITOR=vim" },
+        "fzf": { "type": "boolean", "default": true, "description": "Install fzf" },
+        "ripgrep": { "type": "boolean", "default": true, "description": "Install ripgrep (rg)" },
+        "fd": { "type": "boolean", "default": true, "description": "Install fd" },
+        "bat": { "type": "boolean", "default": true, "description": "Install bat" },
+        "starship": { "type": "boolean", "default": true, "description": "Install starship" },
+        "zoxide": { "type": "boolean", "default": true, "description": "Install zoxide" },
+        "eza": { "type": "boolean", "default": true, "description": "Install eza" }
+    },
+    "containerEnv": {
+        "EDITOR": "vim",
+        "VISUAL": "vim"
+    }
+}

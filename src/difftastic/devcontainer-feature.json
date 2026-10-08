@@ -1,0 +1,15 @@
+{
+    "id": "difftastic",
+    "version": "1.0.0",
+    "name": "difftastic",
+    "description": "Installs difft, a structural diff tool.",
+    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "difftastic version to install, e.g. 0.71.0"
+        }
+    }
+}

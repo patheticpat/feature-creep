@@ -1,0 +1,15 @@
+{
+    "id": "mergiraf",
+    "version": "1.0.0",
+    "name": "mergiraf",
+    "description": "Installs mergiraf, a syntax-aware merge driver.",
+    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "mergiraf version to install, e.g. 0.20.0"
+        }
+    }
+}

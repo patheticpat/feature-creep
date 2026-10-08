@@ -1,0 +1,8 @@
+{
+    "personal": {
+        "image": "mcr.microsoft.com/devcontainers/base:debian",
+        "features": {
+            "personal": {}
+        }
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "id": "jj",
+    "version": "1.0.0",
+    "name": "Jujutsu (jj)",
+    "description": "Installs jj and mounts the host's ~/.config/jj (user config and per-repo configs) into the container.",
+    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": ["latest"],
+            "default": "latest",
+            "description": "jj version to install, e.g. 0.46.0"
+        }
+    },
+    "mounts": [
+        {
+            "type": "bind",
+            "source": "${localEnv:HOME}/.config/jj",
+            "target": "/usr/local/share/jj-host"
+        }
+    ]
+}

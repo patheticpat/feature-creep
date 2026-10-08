@@ -1,0 +1,47 @@
+name: Publish features
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "src/**"
+      - "lib/**"
+      - ".gitea/workflows/release.yaml"
+  workflow_dispatch:
+
+env:
+  REGISTRY: git.adminforge.de
+  NAMESPACE: patheticpat/feature-creep
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check that lib copies are in sync
+        run: |
+          scripts/sync-lib.sh
+          git diff --exit-code -- src/ || {
+            echo "::error::src/*/common.sh is out of date, run scripts/sync-lib.sh and commit"
+            exit 1
+          }
+
+      - name: Log in to registry
+        # The devcontainer CLI reads ~/.docker/config.json, no docker needed.
+        env:
+          REGISTRY_USER: ${{ github.repository_owner }}
+          REGISTRY_TOKEN: ${{ secrets.REGISTRY_TOKEN }}
+        run: |
+          mkdir -p ~/.docker
+          auth="$(printf '%s:%s' "$REGISTRY_USER" "$REGISTRY_TOKEN" | base64 -w0)"
+          printf '{"auths":{"%s":{"auth":"%s"}}}\n' "$REGISTRY" "$auth" > ~/.docker/config.json
+          chmod 600 ~/.docker/config.json
+
+      - name: Publish
+        # Already published versions are skipped; bump "version" to release.
+        run: npx -y @devcontainers/cli features publish ./src --registry "$REGISTRY" --namespace "$NAMESPACE"
