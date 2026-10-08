@@ -1,6 +1,6 @@
 {
     "id": "personal",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "name": "Personal toolbox",
     "description": "Meta feature: pulls in all personal tools via dependsOn. Meant for dev.containers.defaultFeatures.",
     "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
@@ -8,6 +8,7 @@
         "git.adminforge.de/patheticpat/feature-creep/jj:1": {},
         "git.adminforge.de/patheticpat/feature-creep/difftastic:1": {},
         "git.adminforge.de/patheticpat/feature-creep/mergiraf:1": {},
-        "git.adminforge.de/patheticpat/feature-creep/shell-tools:1": {}
+        "git.adminforge.de/patheticpat/feature-creep/shell-tools:1": {},
+        "git.adminforge.de/patheticpat/feature-creep/timezone:1": {}
     }
 }

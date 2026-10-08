@@ -10,6 +10,7 @@ Personal [Dev Container Features](https://containers.dev/implementors/features/)
 | `difftastic`  | `difft`                                                                                        |
 | `mergiraf`    | `mergiraf`                                                                                     |
 | `shell-tools` | vim (`EDITOR=vim`), fzf, ripgrep, fd, bat, starship, zoxide, eza – each can be toggled off     |
+| `timezone`    | Container time zone = host time zone (read-only mount of the host's `/etc/localtime`)          |
 
 Published to `git.adminforge.de/patheticpat/feature-creep/<feature>`. Debian/Ubuntu images only.
 
@@ -38,12 +39,20 @@ The `jj` feature bind-mounts the host's `~/.config/jj` (read-write) to `/usr/loc
 container, jj treats the repo as *moved* and silently updates the stored path in
 `repos/<id>/metadata.binpb`. That happens again in the other direction on the host and is harmless.
 
+### Time zone
+
+The `timezone` feature mounts the host's `/etc/localtime` read-only to `/usr/local/share/host-localtime`. On
+every container start its entrypoint looks for the zone in `/usr/share/zoneinfo` with identical content and
+points `/etc/localtime` and `/etc/timezone` at it, so tools that need a zone *name* (ICU: Node, Java) get e.g.
+`Europe/Berlin` instead of UTC. If host and container tzdata differ so that nothing matches, the host file is
+copied to `/etc/localtime`: local time is still right, only the name is unknown.
+
 ## Development
 
 ```sh
 scripts/sync-lib.sh   # copy lib/common.sh into the features (published features can't share files)
 shellcheck src/*/install.sh lib/*.sh scripts/*.sh
-npx @devcontainers/cli features test -f jj -f difftastic -f mergiraf -f shell-tools \
+npx @devcontainers/cli features test -f jj -f difftastic -f mergiraf -f shell-tools -f timezone \
     --skip-scenarios -i mcr.microsoft.com/devcontainers/base:debian .
 npx @devcontainers/cli features test --global-scenarios-only .   # personal, needs published features
 ```
