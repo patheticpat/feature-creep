@@ -1,0 +1,23 @@
+{
+    "id": "zsh-extras",
+    "version": "1.0.0",
+    "name": "zsh extras",
+    "description": "fzf-tab completion, fzf key bindings and a per-project zsh history that survives rebuilds, appended to the remote user's ~/.zshrc.",
+    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "options": {
+        "fzfTab": { "type": "boolean", "default": true, "description": "Install fzf-tab (fzf for tab completion)" },
+        "fzfKeybindings": { "type": "boolean", "default": true, "description": "Enable fzf key bindings (Ctrl-R, Ctrl-T, Alt-C)" },
+        "persistHistory": { "type": "boolean", "default": true, "description": "Keep the zsh history in a per-devcontainer volume" }
+    },
+    "mounts": [
+        {
+            "type": "volume",
+            "source": "zsh-history-${devcontainerId}",
+            "target": "/usr/local/share/zsh-history"
+        }
+    ],
+    "entrypoint": "/usr/local/share/feature-creep/zsh-extras-init.sh",
+    "installsAfter": [
+        "git.adminforge.de/patheticpat/feature-creep/shell-tools"
+    ]
+}
