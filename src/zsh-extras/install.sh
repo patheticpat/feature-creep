@@ -76,8 +76,14 @@ block="$(
         echo 'fi'
     fi
     if [ "$zoxide" = true ]; then
+        echo 'if command -v zoxide >/dev/null; then'
+        if [ "$history" = true ]; then
+            # Same per-devcontainer volume as the history: survives rebuilds.
+            echo "    [ -w $history_dir ] && export _ZO_DATA_DIR=$history_dir"
+        fi
         # shellcheck disable=SC2016 # expanded by zsh at startup, not here
-        echo 'command -v zoxide >/dev/null && eval "$(zoxide init zsh)"'
+        echo '    eval "$(zoxide init zsh)"'
+        echo 'fi'
     fi
     if [ "$starship" = true ]; then
         echo 'if command -v starship >/dev/null; then'

@@ -11,7 +11,7 @@ Personal [Dev Container Features](https://containers.dev/implementors/features/)
 | `mergiraf`      | `mergiraf`                                                                                       |
 | `shell-tools`   | vim (`EDITOR=vim`), less, fzf, ripgrep, fd, bat, starship, zoxide, eza – each can be toggled off |
 | `timezone`      | Container time zone = host time zone (read-only mount of the host's `/etc/localtime`)            |
-| `zsh-extras`    | fzf-tab, fzf keys, history volume per devcontainer, eza aliases, zoxide, starship – in `~/.zshrc` |
+| `zsh-extras`    | fzf-tab, fzf keys, history + zoxide volume per devcontainer, eza aliases, zoxide, starship – in `~/.zshrc` |
 | `docker-socket` | Remote user joins the group owning a mounted `/var/run/docker.sock` (GID differs per host)       |
 | `claude-config` | Claude Code config (`CLAUDE_CONFIG_DIR`, `~/.claude`) in the named volume `claude-code-config`   |
 | `venv-extras`   | Extra Python packages for matching venvs via a `sitecustomize` overlay – per project, see below  |

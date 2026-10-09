@@ -16,12 +16,12 @@ $character"""
 truncation_length = 100
 truncate_to_repo = false
 
-# Current jj change: change id, bookmarks, conflict/empty/undescribed markers.
+# Current jj change: change id, bookmarks, conflict marker.
 # --ignore-working-copy: never snapshot from the prompt (fast, no side
 # effects); state is as of the last jj command.
 [custom.jj]
 when = "jj --ignore-working-copy root"
-command = '''jj --ignore-working-copy log -r @ -n 1 --no-graph --color never -T 'separate(" ", change_id.shortest(8), bookmarks.map(|b| b.name()).join(" "), if(conflict, "(conflict)"), if(empty, "(empty)"), if(description.first_line() == "", "(no description)"))' '''
+command = '''jj --ignore-working-copy log -r @ -n 1 --no-graph --color never -T 'separate(" ", change_id.shortest(8), bookmarks.map(|b| b.name()).join(" "), if(conflict, "(conflict)"))' '''
 shell = ["sh"]
 symbol = " "
 style = "bold purple"
