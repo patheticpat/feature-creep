@@ -14,8 +14,13 @@ if [ ! -f "$src" ]; then
     log "host /etc/localtime not mounted, keeping container time zone"
     exit 0
 fi
-if [ "$(id -u)" != 0 ]; then
-    log "not running as root, keeping container time zone"
+# Entrypoints run as the container user, which is not always root.
+if [ "$(id -u)" = 0 ]; then
+    as_root() { "$@"; }
+elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+    as_root() { sudo -n "$@"; }
+else
+    log "neither root nor passwordless sudo, keeping container time zone"
     exit 0
 fi
 
@@ -36,15 +41,15 @@ done
 
 # /etc/localtime is usually a symlink into zoneinfo: remove it first, never
 # write through it.
-rm -f /etc/localtime
+as_root rm -f /etc/localtime
 if [ -n "$name" ]; then
-    ln -s "$zoneinfo/$name" /etc/localtime
-    echo "$name" > /etc/timezone
+    as_root ln -s "$zoneinfo/$name" /etc/localtime
+    echo "$name" | as_root tee /etc/timezone >/dev/null
     log "set to $name"
 else
     # Host and container tzdata differ: still get the right local time.
-    cp "$src" /etc/localtime
-    rm -f /etc/timezone
+    as_root cp "$src" /etc/localtime
+    as_root rm -f /etc/timezone
     log "no matching zone name found, copied host /etc/localtime"
 fi
 exit 0

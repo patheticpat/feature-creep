@@ -1,6 +1,6 @@
 {
     "id": "timezone",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "name": "Host time zone",
     "description": "Matches the container's time zone to the host's, using a read-only mount of the host's /etc/localtime.",
     "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
