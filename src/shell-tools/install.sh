@@ -10,6 +10,7 @@ packages=(curl ca-certificates tar)
 [ "${RIPGREP:-true}" = "true" ] && packages+=(ripgrep)
 [ "${FD:-true}" = "true" ] && packages+=(fd-find)
 [ "${BAT:-true}" = "true" ] && packages+=(bat)
+[ "${LESS:-true}" = "true" ] && packages+=(less)
 ensure_packages "${packages[@]}"
 
 # Debian/Ubuntu ship these under different names.
