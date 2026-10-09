@@ -5,6 +5,10 @@ source "$(dirname "$0")/common.sh"
 fzf_tab="${FZFTAB:-true}"
 fzf_keys="${FZFKEYBINDINGS:-true}"
 history="${PERSISTHISTORY:-true}"
+eza_aliases="${EZAALIASES:-true}"
+eza_icons="${EZAICONS:-true}"
+zoxide="${ZOXIDE:-true}"
+starship="${STARSHIP:-true}"
 
 # Must match the mount target in devcontainer-feature.json.
 history_dir=/usr/local/share/zsh-history
@@ -57,6 +61,26 @@ block="$(
         echo '    SAVEHIST=100000'
         echo '    setopt INC_APPEND_HISTORY'
         echo 'fi'
+    fi
+    # Tools come from e.g. shell-tools; each line only acts if it is installed.
+    if [ "$eza_aliases" = true ]; then
+        icons=""
+        [ "$eza_icons" = true ] && icons=" --icons=auto"
+        echo 'if command -v eza >/dev/null; then'
+        echo "    alias ls='eza --group-directories-first$icons'"
+        echo "    alias l='eza -l --git --group-directories-first$icons'"
+        echo "    alias ll='eza -l --git --group-directories-first$icons'"
+        echo "    alias la='eza -la --git --group-directories-first$icons'"
+        echo "    alias lt='eza --tree --level=2 --group-directories-first$icons'"
+        echo 'fi'
+    fi
+    if [ "$zoxide" = true ]; then
+        # shellcheck disable=SC2016 # expanded by zsh at startup, not here
+        echo 'command -v zoxide >/dev/null && eval "$(zoxide init zsh)"'
+    fi
+    if [ "$starship" = true ]; then
+        # shellcheck disable=SC2016 # expanded by zsh at startup, not here
+        echo 'command -v starship >/dev/null && eval "$(starship init zsh)"'
     fi
     echo '# <<< feature-creep zsh-extras <<<'
 )"

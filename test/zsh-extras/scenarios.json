@@ -1,0 +1,9 @@
+{
+    "with_shell_tools": {
+        "image": "mcr.microsoft.com/devcontainers/base:debian",
+        "features": {
+            "shell-tools": {},
+            "zsh-extras": {}
+        }
+    }
+}
