@@ -13,6 +13,7 @@ starship="${STARSHIP:-true}"
 # Must match the mount target in devcontainer-feature.json.
 history_dir=/usr/local/share/zsh-history
 fzf_tab_dir=/usr/local/share/fzf-tab
+starship_config=/usr/local/share/feature-creep/starship.toml
 user="${_REMOTE_USER:-root}"
 home="${_REMOTE_USER_HOME:-$(getent passwd "$user" | cut -d: -f6)}"
 [ -n "$home" ] || fail "could not determine home of $user"
@@ -79,8 +80,11 @@ block="$(
         echo 'command -v zoxide >/dev/null && eval "$(zoxide init zsh)"'
     fi
     if [ "$starship" = true ]; then
+        echo 'if command -v starship >/dev/null; then'
+        echo "    [ -f \$HOME/.config/starship.toml ] || export STARSHIP_CONFIG=$starship_config"
         # shellcheck disable=SC2016 # expanded by zsh at startup, not here
-        echo 'command -v starship >/dev/null && eval "$(starship init zsh)"'
+        echo '    eval "$(starship init zsh)"'
+        echo 'fi'
     fi
     echo '# <<< feature-creep zsh-extras <<<'
 )"
@@ -96,6 +100,7 @@ log "updated $zshrc"
 
 # Entrypoints don't know the remote user: bake it in.
 install -d /usr/local/share/feature-creep
+install -m 0644 "$(dirname "$0")/starship.toml" "$starship_config"
 sed "s|@REMOTE_USER@|$user|" "$(dirname "$0")/zsh-extras-init.sh" \
     > /usr/local/share/feature-creep/zsh-extras-init.sh
 chmod 0755 /usr/local/share/feature-creep/zsh-extras-init.sh

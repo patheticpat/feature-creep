@@ -1,6 +1,6 @@
 {
     "id": "zsh-extras",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "name": "zsh extras",
     "description": "fzf-tab completion, fzf key bindings, a per-project zsh history that survives rebuilds, eza aliases, zoxide and starship, appended to the remote user's ~/.zshrc.",
     "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
@@ -11,7 +11,7 @@
         "ezaAliases": { "type": "boolean", "default": true, "description": "Alias ls, l, ll, la, lt to eza (if installed)" },
         "ezaIcons": { "type": "boolean", "default": true, "description": "Show icons in the eza aliases (needs a Nerd Font)" },
         "zoxide": { "type": "boolean", "default": true, "description": "Initialize zoxide (z, zi), if installed" },
-        "starship": { "type": "boolean", "default": true, "description": "Use the starship prompt instead of the oh-my-zsh theme, if installed" }
+        "starship": { "type": "boolean", "default": true, "description": "Use the starship prompt instead of the oh-my-zsh theme, if installed (feature-creep default config unless ~/.config/starship.toml exists)" }
     },
     "mounts": [
         {

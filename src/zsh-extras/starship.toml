@@ -1,0 +1,28 @@
+# feature-creep default starship config. Used only if ~/.config/starship.toml
+# doesn't exist (see the zsh-extras block in ~/.zshrc).
+"$schema" = "https://starship.rs/config-schema.json"
+
+# Two lines: path, jj, python, duration / input. No git modules (jj repos),
+# no container label (always "Docker" in a devcontainer).
+format = """
+$directory\
+${custom.jj}\
+$python\
+$cmd_duration\
+$line_break\
+$character"""
+
+[directory]
+truncation_length = 100
+truncate_to_repo = false
+
+# Current jj change: change id, bookmarks, conflict/empty/undescribed markers.
+# --ignore-working-copy: never snapshot from the prompt (fast, no side
+# effects); state is as of the last jj command.
+[custom.jj]
+when = "jj --ignore-working-copy root"
+command = '''jj --ignore-working-copy log -r @ -n 1 --no-graph --color never -T 'separate(" ", change_id.shortest(8), bookmarks.map(|b| b.name()).join(" "), if(conflict, "(conflict)"), if(empty, "(empty)"), if(description.first_line() == "", "(no description)"))' '''
+shell = ["sh"]
+symbol = " "
+style = "bold purple"
+format = "on [$symbol$output]($style) "
