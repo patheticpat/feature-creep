@@ -1,0 +1,11 @@
+{
+    "python_image": {
+        "image": "python:3.11-slim-trixie",
+        "features": {
+            "venv-extras": {
+                "packages": "pytest pytest-django ipython",
+                "venvs": "/tmp/venvs/*"
+            }
+        }
+    }
+}

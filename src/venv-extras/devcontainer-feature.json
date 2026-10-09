@@ -1,0 +1,24 @@
+{
+    "id": "venv-extras",
+    "version": "1.0.0",
+    "name": "venv extras",
+    "description": "Makes extra Python packages (e.g. pytest, ipython) importable in matching virtualenvs without installing them there: they live in an overlay that a sitecustomize appends to sys.path. Survives venvs being recreated.",
+    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "options": {
+        "packages": {
+            "type": "string",
+            "default": "",
+            "description": "Space-separated requirement specifiers, e.g. \"pytest pytest-django ipython\""
+        },
+        "venvs": {
+            "type": "string",
+            "default": "/workspace/.venv/*",
+            "description": "Space-separated glob(s) matched against a venv's sys.prefix"
+        },
+        "interpreter": {
+            "type": "string",
+            "default": "python3",
+            "description": "Base interpreter the venvs are created from (name on PATH or absolute path)"
+        }
+    }
+}
