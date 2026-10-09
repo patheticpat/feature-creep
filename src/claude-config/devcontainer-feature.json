@@ -1,0 +1,18 @@
+{
+    "id": "claude-config",
+    "version": "1.0.0",
+    "name": "Claude Code config volume",
+    "description": "Keeps Claude Code's config (login, settings, history, plugins) in the named volume claude-code-config, so it survives rebuilds.",
+    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "mounts": [
+        {
+            "type": "volume",
+            "source": "claude-code-config",
+            "target": "/usr/local/share/claude-config"
+        }
+    ],
+    "containerEnv": {
+        "CLAUDE_CONFIG_DIR": "/usr/local/share/claude-config"
+    },
+    "entrypoint": "/usr/local/share/feature-creep/claude-config-init.sh"
+}
