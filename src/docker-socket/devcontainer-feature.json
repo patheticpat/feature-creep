@@ -1,0 +1,8 @@
+{
+    "id": "docker-socket",
+    "version": "1.0.0",
+    "name": "Docker socket access",
+    "description": "On every start, adds the remote user to the group owning a mounted /var/run/docker.sock, so docker works without sudo whatever the host's docker GID is.",
+    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "entrypoint": "/usr/local/share/feature-creep/docker-socket-init.sh"
+}

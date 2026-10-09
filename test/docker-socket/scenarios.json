@@ -1,0 +1,11 @@
+{
+    "with_socket": {
+        "image": "mcr.microsoft.com/devcontainers/base:debian",
+        "containerUser": "vscode",
+        "remoteUser": "vscode",
+        "mounts": ["source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"],
+        "features": {
+            "docker-socket": {}
+        }
+    }
+}
