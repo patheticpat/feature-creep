@@ -6,7 +6,7 @@ Personal [Dev Container Features](https://containers.dev/implementors/features/)
 | Feature         | Contents                                                                                         |
 | --------------- | ------------------------------------------------------------------------------------------------ |
 | `personal`      | Meta feature, pulls in all of the below via `dependsOn` (except `venv-extras`)                   |
-| `jj`            | jj + zsh completion + bind mount of the host's `~/.config/jj`; VS Code: jj-view, built-in git off |
+| `jj`            | jj + zsh completion (aliases with descriptions) + bind mount of the host's `~/.config/jj`; VS Code: jj-view, built-in git off |
 | `difftastic`    | `difft`                                                                                          |
 | `mergiraf`      | `mergiraf`                                                                                       |
 | `shell-tools`   | vim (`EDITOR=vim`), less, man, fzf, ripgrep, fd, bat, starship, zoxide, eza – each can be toggled off |
@@ -38,6 +38,20 @@ The `jj` feature bind-mounts the host's `~/.config/jj` (read-write) to `/usr/loc
 `.jj/repo/config-id`, which comes along with the workspace mount. Since the repo path differs inside the
 container, jj treats the repo as *moved* and silently updates the stored path in
 `repos/<id>/metadata.binpb`. That happens again in the other direction on the host and is harmless.
+
+### jj alias descriptions
+
+jj's own completion lists aliases without a description. The feature's zsh completion adds one: the text from
+an `[aliases-help]` table in the jj config (user or per-repo), or else what the alias expands to. jj ignores the
+table.
+
+```toml
+[aliases]
+work = ["rebase", "-s", "private", "-d"]
+
+[aliases-help]
+work = "Move the private change (and @) onto <revset>"
+```
 
 ### Time zone
 
