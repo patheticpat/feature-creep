@@ -3,7 +3,7 @@
     "version": "1.1.0",
     "name": "Jujutsu (jj)",
     "description": "Installs jj with dynamic zsh completion, mounts the host's ~/.config/jj (user config and per-repo configs) and sets up VS Code for jj (jj-view, built-in git off).",
-    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "documentationURL": "https://github.com/patheticpat/feature-creep",
     "options": {
         "version": {
             "type": "string",

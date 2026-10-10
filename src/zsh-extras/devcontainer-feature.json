@@ -3,7 +3,7 @@
     "version": "1.3.0",
     "name": "zsh extras",
     "description": "fzf-tab completion, fzf key bindings, a per-project zsh history that survives rebuilds, eza aliases, zoxide and starship, appended to the remote user's ~/.zshrc.",
-    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "documentationURL": "https://github.com/patheticpat/feature-creep",
     "options": {
         "fzfTab": { "type": "boolean", "default": true, "description": "Install fzf-tab (fzf for tab completion)" },
         "fzfKeybindings": { "type": "boolean", "default": true, "description": "Enable fzf key bindings (Ctrl-R, Ctrl-T, Alt-C)" },
@@ -22,6 +22,6 @@
     ],
     "entrypoint": "/usr/local/share/feature-creep/zsh-extras-init.sh",
     "installsAfter": [
-        "git.adminforge.de/patheticpat/feature-creep/shell-tools"
+        "ghcr.io/patheticpat/feature-creep/shell-tools"
     ]
 }

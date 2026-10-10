@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "name": "Claude Code config volume",
     "description": "Keeps Claude Code's config (login, settings, history, plugins) in the named volume claude-code-config, so it survives rebuilds.",
-    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "documentationURL": "https://github.com/patheticpat/feature-creep",
     "mounts": [
         {
             "type": "volume",

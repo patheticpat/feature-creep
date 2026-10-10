@@ -3,15 +3,15 @@
     "version": "1.2.0",
     "name": "Personal toolbox",
     "description": "Meta feature: pulls in all personal tools via dependsOn. Meant for dev.containers.defaultFeatures.",
-    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "documentationURL": "https://github.com/patheticpat/feature-creep",
     "dependsOn": {
-        "git.adminforge.de/patheticpat/feature-creep/jj:1": {},
-        "git.adminforge.de/patheticpat/feature-creep/difftastic:1": {},
-        "git.adminforge.de/patheticpat/feature-creep/mergiraf:1": {},
-        "git.adminforge.de/patheticpat/feature-creep/shell-tools:1": {},
-        "git.adminforge.de/patheticpat/feature-creep/timezone:1": {},
-        "git.adminforge.de/patheticpat/feature-creep/zsh-extras:1": {},
-        "git.adminforge.de/patheticpat/feature-creep/docker-socket:1": {},
-        "git.adminforge.de/patheticpat/feature-creep/claude-config:1": {}
+        "ghcr.io/patheticpat/feature-creep/jj:1": {},
+        "ghcr.io/patheticpat/feature-creep/difftastic:1": {},
+        "ghcr.io/patheticpat/feature-creep/mergiraf:1": {},
+        "ghcr.io/patheticpat/feature-creep/shell-tools:1": {},
+        "ghcr.io/patheticpat/feature-creep/timezone:1": {},
+        "ghcr.io/patheticpat/feature-creep/zsh-extras:1": {},
+        "ghcr.io/patheticpat/feature-creep/docker-socket:1": {},
+        "ghcr.io/patheticpat/feature-creep/claude-config:1": {}
     }
 }

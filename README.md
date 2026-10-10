@@ -16,24 +16,20 @@ Personal [Dev Container Features](https://containers.dev/implementors/features/)
 | `claude-config` | Claude Code config (`CLAUDE_CONFIG_DIR`, `~/.claude`) in the named volume `claude-code-config`   |
 | `venv-extras`   | Extra Python packages for matching venvs via a `sitecustomize` overlay – per project, see below  |
 
-Published to `git.adminforge.de/patheticpat/feature-creep/<feature>`. Debian/Ubuntu images only.
+Published (public) to `ghcr.io/patheticpat/feature-creep/<feature>`. Debian/Ubuntu images only.
 
 ## Usage
 
-1. Log in to the registry on the host (Gitea token with `read:package`):
-   ```sh
-   docker login git.adminforge.de
-   ```
-2. In VS Code **user** settings (`settings.json`):
+1. In VS Code **user** settings (`settings.json`):
    ```json
    "dev.containers.defaultFeatures": {
-     "git.adminforge.de/patheticpat/feature-creep/personal:1": {}
+     "ghcr.io/patheticpat/feature-creep/personal:1": {}
    }
    ```
-3. Rebuild the container.
+2. Rebuild the container.
 
 Instead of `personal`, single features can be listed to pass options, e.g.
-`"git.adminforge.de/patheticpat/feature-creep/shell-tools:1": { "eza": false }`.
+`"ghcr.io/patheticpat/feature-creep/shell-tools:1": { "eza": false }`.
 
 ### jj config
 
@@ -59,7 +55,7 @@ as the container user; if that isn't root they use passwordless `sudo`, otherwis
 ### Volumes
 
 Named volumes of features get the compose project prefix in compose-based devcontainers (e.g.
-`mytalkmaster_devcontainer_claude-code-config`), so `claude-config` is shared per compose project, but across all
+`myproject_devcontainer_claude-code-config`), so `claude-config` is shared per compose project, but across all
 image-based devcontainers. `zsh-extras` uses one volume per devcontainer (`zsh-history-${devcontainerId}`).
 
 ### venv-extras
@@ -69,7 +65,7 @@ Project-specific (package list, venv location), so it goes into the project's `d
 
 ```json
 "features": {
-    "git.adminforge.de/patheticpat/feature-creep/venv-extras:1": {
+    "ghcr.io/patheticpat/feature-creep/venv-extras:1": {
         "packages": "pytest pytest-django ipython",
         "venvs": "/workspace/.venv/*"
     }
@@ -96,8 +92,8 @@ npx @devcontainers/cli features test --global-scenarios-only .   # personal, nee
 ## Releasing
 
 Bump `version` in the feature's `devcontainer-feature.json` and push to `main`. The
-[workflow](.gitea/workflows/release.yaml) publishes every feature whose version doesn't exist in the registry yet
-(tags `1`, `1.x`, `1.x.y`, `latest`).
+[workflow](.github/workflows/release.yaml) publishes every feature whose version doesn't exist in the registry yet
+(tags `1`, `1.x`, `1.x.y`, `latest`), authenticated with the workflow's `GITHUB_TOKEN`.
 
-One-time setup: a Gitea token with `write:package` as **user-level** secret `REGISTRY_TOKEN` (shared with other
-repos publishing to the registry); the registry user is the repo owner. Actions must be enabled for the repository.
+New features are published as private packages: set each new one to public once
+(package settings → *Change visibility*).

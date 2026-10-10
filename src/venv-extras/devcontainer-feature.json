@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "name": "venv extras",
     "description": "Makes extra Python packages (e.g. pytest, ipython) importable in matching virtualenvs without installing them there: they live in an overlay that a sitecustomize appends to sys.path. Survives venvs being recreated.",
-    "documentationURL": "https://git.adminforge.de/patheticpat/feature-creep",
+    "documentationURL": "https://github.com/patheticpat/feature-creep",
     "options": {
         "packages": {
             "type": "string",
