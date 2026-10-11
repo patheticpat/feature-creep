@@ -5,5 +5,13 @@
             "shell-tools": {},
             "zsh-extras": {}
         }
+    },
+    "with_omz_plugins": {
+        "build": {
+            "dockerfile": "Dockerfile"
+        },
+        "features": {
+            "zsh-extras": {}
+        }
     }
 }

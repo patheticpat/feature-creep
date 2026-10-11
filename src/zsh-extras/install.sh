@@ -38,21 +38,26 @@ fi
 install -d -o "$user" -g "$group" "$history_dir"
 
 # Appended to ~/.zshrc, i.e. after compinit (e.g. oh-my-zsh), which fzf-tab
-# needs. zsh reads HISTFILE only after all startup files, so setting it here
-# works. Replaced as a whole on reinstall.
+# needs. fzf comes before fzf-tab: `fzf --zsh` also binds Tab (fzf's **
+# completion), and fzf-tab has to bind Tab last, so it wraps fzf's completion
+# and not the other way round. Plugins loaded earlier by the image don't get
+# in the way: zsh-autosuggestions rebinds its widgets before every prompt and
+# zsh-syntax-highlighting doesn't wrap widgets on zsh >= 5.9. zsh reads
+# HISTFILE only after all startup files, so setting it here works. Replaced as
+# a whole on reinstall.
 block="$(
     echo '# >>> feature-creep zsh-extras >>>'
-    if [ "$fzf_tab" = true ]; then
-        echo "if [ -r $fzf_tab_dir/fzf-tab.plugin.zsh ]; then"
-        echo "    source $fzf_tab_dir/fzf-tab.plugin.zsh"
-        echo "    zstyle ':completion:*' menu no"
-        echo 'fi'
-    fi
     if [ "$fzf_keys" = true ]; then
         echo 'if command -v fzf >/dev/null && fzf --zsh >/dev/null 2>&1; then'
         echo '    source <(fzf --zsh)'
         echo 'elif [ -r /usr/share/doc/fzf/examples/key-bindings.zsh ]; then'
         echo '    source /usr/share/doc/fzf/examples/key-bindings.zsh  # fzf < 0.48'
+        echo 'fi'
+    fi
+    if [ "$fzf_tab" = true ]; then
+        echo "if [ -r $fzf_tab_dir/fzf-tab.plugin.zsh ]; then"
+        echo "    source $fzf_tab_dir/fzf-tab.plugin.zsh"
+        echo "    zstyle ':completion:*' menu no"
         echo 'fi'
     fi
     if [ "$history" = true ]; then
