@@ -73,8 +73,8 @@ as_user() {
 }
 
 # Install now, so the first start in the container doesn't download and
-# compile for minutes: on startup lazy.nvim installs the plugins (at the
-# commits in lazy-lock.json), then LazyVim the treesitter parsers. One run,
+# compile for minutes: on startup lazy.nvim installs the plugins, then
+# LazyVim the treesitter parsers. One run,
 # since quitting while the parsers install leaves broken leftovers.
 log "installing plugins and treesitter parsers"
 as_user nvim --headless "+luafile $(dirname "$0")/wait-for-parsers.lua"

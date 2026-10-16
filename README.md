@@ -57,10 +57,10 @@ work = "Move the private change (and @) onto <revset>"
 ### Neovim
 
 The `neovim` feature installs the latest Neovim release to `/opt/nvim` and copies `src/neovim/config` to
-`~/.config/nvim` (unless that already exists): a LazyVim starter config without extras. lazy.nvim installs the
-plugins at the commits in its `lazy-lock.json` and builds the treesitter parsers during the image build (hence
-git, gcc and the tree-sitter CLI). To change the config, edit `src/neovim/config` and bump the version; after
-`:Lazy update` in the container, copy the new `lazy-lock.json` back. `"config": false` installs only Neovim.
+`~/.config/nvim` (unless that already exists): a single `init.lua` with LazyVim, no extras. lazy.nvim installs
+the latest plugins and builds the treesitter parsers during the image build (hence git, gcc and the tree-sitter
+CLI). To change the config, edit `src/neovim/config/init.lua` and bump the version. `"config": false` installs
+only Neovim.
 
 ### Time zone
 
