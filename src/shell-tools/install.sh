@@ -5,7 +5,6 @@ source "$(dirname "$0")/common.sh"
 arch="$(detect_arch)"
 
 packages=(curl ca-certificates tar)
-[ "${VIM:-true}" = "true" ] && packages+=(vim)
 [ "${FZF:-true}" = "true" ] && packages+=(fzf)
 [ "${RIPGREP:-true}" = "true" ] && packages+=(ripgrep)
 [ "${FD:-true}" = "true" ] && packages+=(fd-find)

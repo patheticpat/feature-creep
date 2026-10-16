@@ -1,11 +1,10 @@
 {
     "id": "shell-tools",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "name": "Shell tools",
-    "description": "Installs vim, less, man, fzf, ripgrep, fd, bat, starship, zoxide and eza.",
+    "description": "Installs less, man, fzf, ripgrep, fd, bat, starship, zoxide and eza.",
     "documentationURL": "https://github.com/patheticpat/feature-creep",
     "options": {
-        "vim": { "type": "boolean", "default": true, "description": "Install vim and set EDITOR=vim" },
         "less": { "type": "boolean", "default": true, "description": "Install less" },
         "man": { "type": "boolean", "default": true, "description": "Install man and restore man pages that slim images strip" },
         "fzf": { "type": "boolean", "default": true, "description": "Install fzf" },
@@ -15,9 +14,5 @@
         "starship": { "type": "boolean", "default": true, "description": "Install starship" },
         "zoxide": { "type": "boolean", "default": true, "description": "Install zoxide" },
         "eza": { "type": "boolean", "default": true, "description": "Install eza" }
-    },
-    "containerEnv": {
-        "EDITOR": "vim",
-        "VISUAL": "vim"
     }
 }

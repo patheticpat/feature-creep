@@ -1,0 +1,27 @@
+{
+    "id": "neovim",
+    "version": "1.0.0",
+    "name": "Neovim (LazyVim)",
+    "description": "Installs Neovim (EDITOR=nvim) with a LazyVim config in ~/.config/nvim, plugins pinned by its lazy-lock.json and installed at build time, plus what LazyVim needs (git, tree-sitter CLI, C compiler).",
+    "documentationURL": "https://github.com/patheticpat/feature-creep",
+    "options": {
+        "version": {
+            "type": "string",
+            "proposals": ["latest", "stable"],
+            "default": "latest",
+            "description": "Neovim version to install, e.g. 0.12.6"
+        },
+        "config": {
+            "type": "boolean",
+            "default": true,
+            "description": "Install the bundled LazyVim config to ~/.config/nvim (skipped if that already exists) and its plugins"
+        }
+    },
+    "containerEnv": {
+        "EDITOR": "nvim",
+        "VISUAL": "nvim"
+    },
+    "installsAfter": [
+        "ghcr.io/patheticpat/feature-creep/shell-tools"
+    ]
+}

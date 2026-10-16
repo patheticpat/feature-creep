@@ -1,0 +1,8 @@
+{
+    "slim_image": {
+        "image": "python:3.11-slim-trixie",
+        "features": {
+            "neovim": {}
+        }
+    }
+}
